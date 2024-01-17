@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     return {
       base: baseLink,
       calendlyLink: calendlyLink,
-      needToRefresh: baseLink != calendlyLink,
+      needToSaveCoockie: baseLink != calendlyLink,
     };
   }
 
@@ -71,20 +71,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
-  const linkObj = generateCalendlyLinkObject();
-  let resultLink = linkObj.base;
+  deleteCookie("calendly_link");
 
-  if (linkObj.needToRefresh) {
-    setCookie("calendly_link", linkObj.calendlyLink, {
-      secure: true,
-      "max-age": 60 * 60 * 24 * 14, // 2 weeks
-    });
-  }
+  let resultLink = getCookie("calendly_enway_link");
 
-  let calendlyLinkFromCookie = getCookie("calendly_link");
-
-  if (calendlyLinkFromCookie) {
-    resultLink = calendlyLinkFromCookie;
+  if (!resultLink) {
+    const linkObj = generateCalendlyLinkObject();
+    if (linkObj.needToSaveCoockie) {
+      setCookie("calendly_enway_link", linkObj.calendlyLink, {
+        secure: true,
+        "max-age": 60 * 60 * 24 * 30, // 1 month
+      });
+    }
+    resultLink = linkObj.calendlyLink;
   }
 
   document.querySelectorAll("a.calendly-js").forEach((el) => {
