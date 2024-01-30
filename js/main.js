@@ -24,14 +24,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 
-    let result = `${baseLink}?`;
+    let data = [];
 
     for (const key in utm) {
       const value = utm[key];
       if (value) {
-        result = `${result}${key}=${value}`;
+        data.push(`${key}=${value}`);
       }
     }
+    
+    let searchData = data.join('&');
+    let result = `${baseLink}?${searchData}`;
 
     return result;
   }
