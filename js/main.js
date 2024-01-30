@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         data.push(`${key}=${value}`);
       }
     }
-    
-    let searchData = data.join('&');
+
+    let searchData = data.join("&");
     let result = `${baseLink}?${searchData}`;
 
     return result;
@@ -80,18 +80,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   deleteCookie("calendly_enway_link");
+  deleteCookie("calendly_link_v2");
 
-  let resultLink = getCookie("calendly_link_v2");
+  let resultLink = getCookie("calendly_link_v3");
 
   if (!resultLink) {
     resultLink = generateCalendlyLinkObject();
-    setCookie("calendly_link_v2", resultLink, {
+    setCookie("calendly_link_v3", resultLink, {
       secure: true,
       "max-age": 60 * 60 * 24 * 30, // 1 month
     });
   }
 
-  let utm_term = uri.pathname == '/' ? 'home-page' : uri.pathname.split('/').at(-1);
+  let utm_term =
+    uri.pathname == "/"
+      ? "home-page"
+      : uri.pathname.split("/").filter(Boolean).at(-1);
   resultLink = `${resultLink}&utm_term=${utm_term}`;
 
   document.querySelectorAll("a.calendly-js").forEach((el) => {

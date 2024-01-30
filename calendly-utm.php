@@ -2,7 +2,7 @@
 /*
     Plugin Name: Calendly UTM
     Description: This plugin store coockies and update links for calendly-js links
-    Version: 2.0.1
+    Version: 2.0.3
     Author: Aleksandr Zanko 
     Author URI: https://enway.com/
     License: GPL2
