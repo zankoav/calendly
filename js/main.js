@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (!utm.source) {
       if (document.referrer) {
         const referrer = new URL(document.referrer);
-        utm.source = referrer.hostname;
+        utm.source = referrer.hostname.replace('www.', '');
         if (utm.source) {
           utm.medium = "organic";
         }
@@ -79,14 +79,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
+  deleteCookie("calendly_link_v3");
   deleteCookie("calendly_enway_link");
   deleteCookie("calendly_link_v2");
 
-  let resultLink = getCookie("calendly_link_v3");
+  let resultLink = getCookie("calendly_link_v4");
 
   if (!resultLink) {
     resultLink = generateCalendlyLinkObject();
-    setCookie("calendly_link_v3", resultLink, {
+    setCookie("calendly_link_v4", resultLink, {
       secure: true,
       "max-age": 60 * 60 * 24 * 30, // 1 month
     });
