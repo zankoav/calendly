@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       : uri.pathname.split("/").filter(Boolean).at(-1);
   resultLink = `${resultLink}&utm_term=${utm_term}`;
 
-  document.querySelectorAll("a.calendly-js").forEach((el) => {
+  document.querySelectorAll("a.calendly-js, .calendly-table-block .btn").forEach((el) => {
     el.setAttribute("href", resultLink);
   });
 });
